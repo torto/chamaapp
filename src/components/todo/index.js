@@ -1,4 +1,5 @@
 import { fetchToDos, addOrUpdateToDo, removeToDo } from 'modules/firebase/actions/database'
+import { signOut } from 'modules/firebase/actions/auth'
 import { withStyles } from '@material-ui/core/styles'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
 import { bindActionCreators } from 'redux'
@@ -32,7 +33,8 @@ const mapStateToProps = ({ auth, todos }) => ({ auth, todos })
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchToDos,
   addOrUpdateToDo,
-  removeToDo
+  removeToDo,
+  signOut
 }, dispatch)
 const redux = connect(
   mapStateToProps,

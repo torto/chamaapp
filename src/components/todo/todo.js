@@ -10,34 +10,13 @@ import Row from './UI/row'
 import Add from './UI/add'
 import AddIcon from '@material-ui/icons/Add'
 import moment from 'moment'
-
-export const styles = () => ({
-  root: {
-    width: '100%',
-    maxHeight: '25rem',
-    overflow: 'auto',
-    flex: 1,
-  },
-  content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    marginBottom: '1.5rem',
-  },
-  fab: {
-    position: 'absolute',
-    bottom: '-1.45rem',
-  },
-  list: {
-    width: '100%'
-  }
-})
+import Button from '@material-ui/core/Button'
 
 const strings = {
   title: 'Todos List',
   addTask: 'Add Task',
-  empty: 'To add a new to-do click in the buttom below.'
+  empty: 'To add a new to-do click in the buttom below.',
+  signOut: 'Sign Out'
 }
 
 export class TodoComponent extends Component {
@@ -62,6 +41,7 @@ export class TodoComponent extends Component {
     this.handleToogleModalWithValues = this.handleToogleModalWithValues.bind(this)
     this.handleChangeIsComplete = this.handleChangeIsComplete.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleSignOut = this.handleSignOut.bind(this)
 
     this.renderRowTodos = this.renderRowTodos.bind(this)
   }
@@ -145,6 +125,13 @@ export class TodoComponent extends Component {
     }
   }
 
+  handleSignOut() {
+    const  { signOut } = this.props
+    return () => {
+      signOut()
+    }
+  }
+
   render() {
     const { classes, fullScreen, todos } = this.props
     const { isOpenDialog } = this.state
@@ -181,6 +168,10 @@ export class TodoComponent extends Component {
               <AddIcon />
             </Fab>
 
+            <Button color="primary" onClick={this.handleSignOut()} className={classes.button}>
+              {strings.signOut}
+            </Button>
+
           </CardContent>
         </Card>
       </Container>
@@ -204,6 +195,7 @@ TodoComponent.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
   fetchToDos: PropTypes.func,
   addOrUpdateToDo: PropTypes.func,
+  signOut: PropTypes.func,
   removeToDo: PropTypes.func,
   todos: PropTypes.array,
   auth: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])

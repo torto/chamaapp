@@ -27,8 +27,9 @@ const styles = () => ({
 })
 
 const diffDays = (date) => {
-  const diffDays = moment(date).endOf(DIFF_MOMENT_DAY).diff(moment(), DIFF_MOMENT_DAY)
-  if(date < moment().valueOf()) return moment(date).format(DATE_FOMAT)
+  const diffDays = moment(date).endOf(DIFF_MOMENT_DAY)
+    .diff(moment().endOf(DIFF_MOMENT_DAY), DIFF_MOMENT_DAY)
+  if( moment(date).valueOf() < moment().valueOf()) return moment(date).format(DATE_FOMAT)
   if(diffDays === 0) return strings.days.today
   if(diffDays === 1) return strings.days.tomorrow
   return `${diffDays} ${strings.days.moreDays}`

@@ -19,6 +19,7 @@ export default function(ComposedComponent) {
       if (!nextProps.auth) {
         this.context.router.history.push("/")
       }
+      return true
     }
 
     render() {
